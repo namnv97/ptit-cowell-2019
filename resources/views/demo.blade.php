@@ -5,6 +5,10 @@
     <title>Cart Vue</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @if(Auth::check())
+    <meta name="di-resu" content="{{Auth::user()->id}}">
+    @endif
     <link rel="shortcut icon" href="{{asset('cowell/uploads/images/favicon.ico')}}" type="image/x-icon">
     <link rel="icon" href="{{asset('cowell/uploads/images/favicon.ico')}}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{{asset('cowell/client/css/library.min.css')}}">

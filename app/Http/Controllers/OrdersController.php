@@ -142,10 +142,6 @@ class OrdersController extends Controller
 
     public function checkout(Request $request)
     {
-        if(!Auth::check())
-        {
-            return redirect()->route('login');
-        }
         $items = $request->cookie('cart_item');
 
         if(empty($items)) return redirect()->route('home');

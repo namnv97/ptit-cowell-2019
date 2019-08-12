@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use DB;
+// use Auth;
 
 
 use App\Model\Products;
 use App\Model\Cart_items;
 use App\Model\Options;
 use App\Model\Categories;
+use App\Model\Users;
 
 class ApiController extends Controller
 {
@@ -282,6 +285,38 @@ class ApiController extends Controller
         return $items;
     }
 
+
+    public function get_current_user($id)
+    {
+        $user = Users::find($id);
+
+        $arr = array(
+            'name' => $user->name,
+            'email' => $user->email
+        ); 
+
+        return response()->json($arr);
+    }
+
+    public function get_item_checkout(Request $request)
+    {
+        $carts = $request->cookie('cart_item');
+
+        $carts = json_decode($carts,true);
+
+        $arr = [];
+
+        foreach($carts as $key => $cart):
+            $product = Products::find($key);
+            $arr[] = array(
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => $cart
+            );
+        endforeach;
+
+        return response()->json($arr);
+    }
 
 
 

@@ -29,6 +29,8 @@ Route::group(['namespace' => 'api', 'middleware' => ['api','cors']], function ()
 	Route::get('get_menus','ApiController@get_menus')->name('api.get_menus');
 	Route::get('get_footer','ApiController@get_footer')->name('api.get_footer');
 	Route::get('get_number_cart','ApiController@get_number_cart')->name('api.get_number_cart');
+	Route::get('get_current_user/{id}','ApiController@get_current_user')->name('api.get_current_user');
+	Route::get('get_item_checkout','ApiController@get_item_checkout')->middleware(['web','api'])->name('api.get_item_checkout');
 
 
 

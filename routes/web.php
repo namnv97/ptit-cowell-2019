@@ -86,8 +86,10 @@ Route::post('update_cart_item', 'OrdersController@update_cart_item')->name('cart
 Route::post('add-order', 'OrdersController@add_order')->name('orders.add');
 Route::post('delete_item', 'OrdersController@delete_item')->name('cart.delete_item');
 Route::post('delete_cart', 'OrdersController@delete_cart')->name('cart.delete_cart');
-Route::get('checkout', 'OrdersController@checkout')->name('cart.checkout');
-Route::post('checkout', 'OrdersController@checkout_save')->name('cart.checkout');
+Route::get('checkout',function(){
+    return view('demo');
+})->middleware('auth')->name('cart.checkout');
+Route::post('checkout', 'OrdersController@checkout_save')->middleware(['auth','cors'])->name('cart.checkout');
 Route::get('profile', 'UserController@profile')->middleware('auth')->name('client.profile');
 Route::post('profile', 'UserController@save')->middleware('auth')->name('client.profile');
 Route::get('changepass', 'UserController@changepass')->middleware('auth')->name('client.changepass');
@@ -101,12 +103,6 @@ Route::get('thankyou',function(){
 
 Route::get('search','HomeController@search')->name('client.search');
 
-Route::get('demovue',function(){
-    return view('demo');
-});
-
-
-// Auth::routes();
 Auth::routes(['register' => false]);
 
 Route::get('/login', 'LoginController@login')->name('login');
