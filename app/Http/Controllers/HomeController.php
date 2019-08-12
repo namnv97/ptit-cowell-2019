@@ -167,6 +167,9 @@ class HomeController extends Controller
         return view('client.search',$this->_data);
     }
 
-
+    public function test_branch()
+    {
+    	return true;
+    }
 
 }
